@@ -1,8 +1,8 @@
 /* Elimina el scroll horizontal */
-body {
+/* body {
     overflow-x: hidden;
-    margin: 0; /* Opcional: quita márgenes predeterminados del body */
-  }
+    margin: 0; 
+  } */
   
   /* Opcional: asegurarte de que el contenido se ajuste a la pantalla */
   /* html, body {

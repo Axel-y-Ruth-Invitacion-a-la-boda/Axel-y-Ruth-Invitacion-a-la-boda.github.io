@@ -5,9 +5,9 @@ body {
   }
   
   /* Opcional: asegurarte de que el contenido se ajuste a la pantalla */
-  html, body {
+  /* html, body {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
-  }
+  } */
   

@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     document.getElementById("aceptarInvitacionBtn").addEventListener("click", () => {
-        document.getElementById("tituloInvitado").textContent = "Xd!";
+        document.getElementById("tituloInvitado").textContent = "Xd";
       });
   });
   

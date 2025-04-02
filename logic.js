@@ -1,17 +1,20 @@
 window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
+    const id = params.get("name");
+    const count = params.get("pases");
     const titulo = document.getElementById("tituloInvitado");
     if (titulo) {
       if (id) {
-        titulo.textContent = `Invitación #${id}`;
+        titulo.textContent = `${id}`;
       }else{
         titulo.textContent = "¡Bienvenido!";
       }
     }
     const numeroPases = document.getElementById("numeroPases");
     if (numeroPases) {
-      numeroPases.textContent = "2 Personas";
+      if (count) {
+        numeroPases.textContent = `${count} Persona(s)`;
+      }
     }
 
     document.getElementById("aceptarInvitacionBtn").addEventListener("click", () => {

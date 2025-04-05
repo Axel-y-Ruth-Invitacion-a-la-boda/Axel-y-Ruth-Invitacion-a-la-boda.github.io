@@ -3,10 +3,15 @@ import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/fi
 // Tu configuración (la copias desde Firebase Console)
 
 const firebaseConfig = {
-    
+  apiKey: "AIzaSyDQaIFUznKDHCcwPl3nA_IWzjr-9b8FiIM",
+  authDomain: "invitaciones-back-axel-y-ruth.firebaseapp.com",
+  projectId: "invitaciones-back-axel-y-ruth",
+  storageBucket: "invitaciones-back-axel-y-ruth.appspot.com",
+  messagingSenderId: "322678533083",
+  appId: "1:322678533083:web:0b56beb148bf410b3655fe" 
 };
 
-collection = ""; // Nombre de la colección
+const collection = "familias"; // Nombre de la colección
   
 
 const app = initializeApp(firebaseConfig);

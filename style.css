@@ -4,9 +4,9 @@ body {
     margin: 0; /* Opcional: quita márgenes predeterminados del body */
   }
 
-#body {
+/* #body {
   display: none;
-}
+} */
   
   /* html, body {
     width: 100%;

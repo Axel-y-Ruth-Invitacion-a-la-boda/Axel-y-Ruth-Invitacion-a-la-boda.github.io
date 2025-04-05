@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   const familia = await getFamiliaById(id);
 
   const body = document.querySelector("body"); 
-  body.style.display = !familia? "none" : "block";
+  // body.style.display = !familia? "none" : "block";
 
   const song = document.getElementById("song");
   
@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   const titulo = document.getElementById("tituloInvitado");
   if (titulo) {
-    titulo.textContent = id && familyName ? `Fam. ${familyName}` : "¡Bienvenido!";
+    titulo.textContent = id && familyName ? `Fam.${familyName}` : "¡Bienvenido!";
   }
 
   const count = familia.integrantes;

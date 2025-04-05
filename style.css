@@ -1,8 +1,9 @@
 /* Elimina el scroll horizontal */
-body {
-    overflow-x: hidden;
-    margin: 0; /* Opcional: quita márgenes predeterminados del body */
-  }
+body, html {
+  height: 100%; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+  margin: 0; /* Elimina márgenes predeterminados */
+  overflow: hidden; /* Oculta el contenido que se desborda */
+}
 
 /* #body {
   display: none;

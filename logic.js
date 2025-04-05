@@ -17,7 +17,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     song.muted = false; // Desmutea el audio
   }
 
-
   const familyName = familia.nombre
   const familyAsistand = familia.asistencia
 
@@ -33,14 +32,13 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   const aceptarBtn = document.getElementById("aceptarInvitacionBtn");
-  if (aceptarBtn) {
+  if (aceptarBtn && familia) {
     aceptarBtn.addEventListener("click", () => {
       confirmarAsistencia(id);
     });
   }
 
-  confirmacion(familyAsistand);
-
+  familia? confirmacion(familyAsistand) : null;
 });
 
 function confirmacion(confirmacion) {

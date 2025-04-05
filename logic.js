@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   const familia = await getFamiliaById(id);
 
-  const body = document.querySelector("body"); 
+  // const body = document.querySelector("body"); 
   // body.style.display = !familia? "none" : "block";
 
   const song = document.getElementById("song");

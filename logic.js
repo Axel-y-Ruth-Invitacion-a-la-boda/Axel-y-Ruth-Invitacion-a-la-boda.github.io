@@ -8,12 +8,12 @@ window.addEventListener('DOMContentLoaded', async () => {
   let familia = null;
 
   try {
-    familia  = await getFamiliaById(id) || null;
+    familia  = await getFamiliaById(id);
   } catch (error) {
     familia = null;
   }
   const body = document.querySelector("body"); 
-  body.style.display = id === "admin" || familia ? "block" : "none";
+  body.style.display = familia ? "block" : "none";
 
   const song = document.getElementById("song");
   

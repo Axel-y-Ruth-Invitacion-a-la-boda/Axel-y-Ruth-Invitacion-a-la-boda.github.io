@@ -38,13 +38,13 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   const aceptarBtn = document.getElementById("aceptarInvitacionBtn");
-  // if (aceptarBtn && familia) {
+  if (aceptarBtn && (familia || id === "admin")) {
     aceptarBtn.addEventListener("click", () => {
       id === "admin"? admin() : confirmarAsistencia(id);
     });
-  // }
+  }
 
-  // familia? confirmacion(familyAsistand) : null;
+  familia? confirmacion(familyAsistand) : null;
 });
 
 function confirmacion(confirmacion) {

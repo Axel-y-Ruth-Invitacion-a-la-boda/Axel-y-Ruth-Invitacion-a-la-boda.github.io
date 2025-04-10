@@ -31,3 +31,39 @@ export async function confirmarAsistencia(id) {
         asistencia: true
     });
   }
+
+const data = []
+
+const invitados = data.map((invitado) => ({
+    asistencia: false,
+    asistentes: 0,
+    integrantes: parseInt(invitado.Adultos) + parseInt(invitado.Peques),
+    nombre: invitado.Nombre_Invitacion,
+}));
+
+// 🚀 Función para insertar en Firestore
+export async function insertarInvitados() {
+  console.log(invitados);
+
+  for (const invitado of invitados) {
+    try {
+      await addDoc(collection(db, col), invitado);
+      console.log(`✅ Insertado: ${invitado.nombre}`);
+    } catch (error) {
+      console.error(`❌ Error en ${invitado.nombre}:`, error);
+    }
+  }
+  alert("🎉 ¡Todos los invitados fueron insertados!");
+}
+
+
+// Funcioin para obtener los id de los documentos
+export async function getAllIds() {
+  const querySnapshot = await getDocs(collection(db, col));
+  const ids = [];
+  querySnapshot.forEach((doc) => {
+    ids.push({url:`https://axel-y-ruth-invitacion-a-la-boda.github.io/?id=${doc.id}`, nombre: doc.data().nombre}); // Cambia 'nombre' por el campo que quieras mostrar
+  });
+  return ids;
+}
+

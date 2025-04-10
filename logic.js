@@ -1,13 +1,19 @@
-import { getFamiliaById, confirmarAsistencia, } from './firebase.js';
+import { getFamiliaById, confirmarAsistencia, getAllIds } from './firebase.js';
 
 window.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
+  console.log(id)
 
-  const familia = await getFamiliaById(id);
+  let familia = null;
 
+  try {
+    familia  = await getFamiliaById(id) || null;
+  } catch (error) {
+    familia = null;
+  }
   const body = document.querySelector("body"); 
-  body.style.display = !familia? "none" : "block";
+  body.style.display = id === "admin" || familia ? "block" : "none";
 
   const song = document.getElementById("song");
   
@@ -17,28 +23,28 @@ window.addEventListener('DOMContentLoaded', async () => {
     song.muted = false; // Desmutea el audio
   }
 
-  const familyName = familia.nombre
-  const familyAsistand = familia.asistencia
+  const familyName = familia?.nombre || null;
+  const familyAsistand = familia?.asistencia || null;
 
   const titulo = document.getElementById("tituloInvitado");
   if (titulo) {
-    titulo.textContent = id && familyName ? `Fam.${familyName}` : "¡Bienvenido!";
+    titulo.textContent = id && familyName ? `${familyName}` : "¡Bienvenido!";
   }
 
-  const count = familia.integrantes;
+  const count = familia?.integrantes;
   const numeroPases = document.getElementById("numeroPases");
   if (numeroPases && count) {
     numeroPases.textContent = `${count} Persona(s)`;
   }
 
   const aceptarBtn = document.getElementById("aceptarInvitacionBtn");
-  if (aceptarBtn && familia) {
+  // if (aceptarBtn && familia) {
     aceptarBtn.addEventListener("click", () => {
-      confirmarAsistencia(id);
+      id === "admin"? admin() : confirmarAsistencia(id);
     });
-  }
+  // }
 
-  familia? confirmacion(familyAsistand) : null;
+  // familia? confirmacion(familyAsistand) : null;
 });
 
 function confirmacion(confirmacion) {
@@ -59,6 +65,9 @@ function confirmacion(confirmacion) {
   }
 }
 
+async function admin(){
+  console.log(await getAllIds());
+}
 
 $(function() {
   $( "#aceptarInvitacionBtn" ).click(function() {

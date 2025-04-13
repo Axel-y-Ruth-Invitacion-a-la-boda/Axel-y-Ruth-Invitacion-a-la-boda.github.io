@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     familia = null;
   }
   const body = document.querySelector("body"); 
-  body.style.display = familia ? "block" : "none";
+  body.style.display = familia || id === "admin" ? "block" : "none";
 
   const song = document.getElementById("song");
   
@@ -66,8 +66,48 @@ function confirmacion(confirmacion) {
 }
 
 async function admin(){
-  console.log(await getAllIds());
+  const data = await getAllIds();
+  console.log(data);
+  // ordenar data.asistencia por true y false
+  data.sort((a, b) => b.asistencia - a.asistencia);
+  generateCSVFromJSON(data, "invitados.csv");
 }
+
+function generateCSVFromJSON(jsonData, fileName = 'data.csv') {
+  if (!jsonData || !jsonData.length) {
+    console.error('JSON data is empty or invalid.');
+    return;
+  }
+
+  const headers = Object.keys(jsonData[0]);
+  const csvRows = [];
+
+  // Agregar encabezados
+  csvRows.push(headers.join(','));
+
+  // Agregar filas
+  for (const row of jsonData) {
+    const values = headers.map(header => {
+      const escaped = ('' + row[header]).replace(/"/g, '""');
+      return `"${escaped}"`;
+    });
+    csvRows.push(values.join(','));
+  }
+
+  const csvContent = csvRows.join('\n');
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+  // Crear enlace de descarga
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+  link.setAttribute('href', url);
+  link.setAttribute('download', fileName);
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
 
 $(function() {
   $( "#aceptarInvitacionBtn" ).click(function() {

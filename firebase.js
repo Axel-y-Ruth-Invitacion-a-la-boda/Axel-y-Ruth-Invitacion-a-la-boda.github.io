@@ -62,7 +62,7 @@ export async function getAllIds() {
   const querySnapshot = await getDocs(collection(db, col));
   const ids = [];
   querySnapshot.forEach((doc) => {
-    ids.push({url:`https://axel-y-ruth-invitacion-a-la-boda.github.io/?id=${doc.id}`, nombre: doc.data().nombre}); // Cambia 'nombre' por el campo que quieras mostrar
+    ids.push({url:`https://axel-y-ruth-invitacion-a-la-boda.github.io/?id=${doc.id}`, nombre: doc.data().nombre, asistencia: doc.data().asistencia, integrantes: doc.data().integrantes}); // Cambia 'nombre' por el campo que quieras mostrar
   });
   return ids;
 }

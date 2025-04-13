@@ -85,14 +85,35 @@ function generateCSVFromJSON(jsonData, fileName = 'data.csv') {
   // Agregar encabezados
   csvRows.push(headers.join(','));
 
-  // Agregar filas
+  let sumaConfirmados = 0;
+  let sumaSinConfirmar = 0;
+
+  // Agregar filas y calcular sumas
   for (const row of jsonData) {
     const values = headers.map(header => {
-      const escaped = ('' + row[header]).replace(/"/g, '""');
+      const value = row[header] !== undefined ? row[header] : '';
+      const escaped = ('' + value).replace(/"/g, '""');
       return `"${escaped}"`;
     });
+
+    const integrantes = Number(row.integrantes) || 0;
+
+    if (row.asistencia === true) {
+      sumaConfirmados += integrantes;
+    } else {
+      sumaSinConfirmar += integrantes;
+    }
+
     csvRows.push(values.join(','));
   }
+
+  const total = sumaConfirmados + sumaSinConfirmar;
+
+  // Fila vacía y luego totales
+  csvRows.push('');
+  csvRows.push(`,,,,Suma de confirmados:,${sumaConfirmados}`);
+  csvRows.push(`,,,,Suma de sin confirmar:,${sumaSinConfirmar}`);
+  csvRows.push(`,,,,Total:,${total}`);
 
   const csvContent = csvRows.join('\n');
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -107,6 +128,7 @@ function generateCSVFromJSON(jsonData, fileName = 'data.csv') {
   link.click();
   document.body.removeChild(link);
 }
+
 
 
 $(function() {
